@@ -11,6 +11,7 @@ import javax.validation.Valid;
 
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
+import com.bolsadeideas.springboot.backend.apirest.dto.UserDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -209,6 +210,13 @@ public class ClienteRestController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"");
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
+	}
+
+	//TODO terminar el metodo
+	@PostMapping("/clientes/register")
+	public ResponseEntity<?> registerUserAccount(@RequestParam("user") UserDto usuario) {
+		
+		return null;
 	}
 
 	@Secured("ROLE_ADMIN")
