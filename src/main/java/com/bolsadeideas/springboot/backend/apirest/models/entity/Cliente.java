@@ -1,19 +1,11 @@
 package com.bolsadeideas.springboot.backend.apirest.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -24,107 +16,124 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "clientes")
 public class Cliente implements Serializable {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 
-	@NotEmpty
-	@Size(min = 2, max = 15)
-	@Column(nullable = false)
-	private String nombre;
+    public Cliente() {
+        this.listaFactura = new ArrayList<>();
+    }
 
-	@NotEmpty
-	@Size(min = 3)
-	@Column(nullable = false)
-	private String apellido;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@NotEmpty
-	@Email
-	@Column(nullable = false, unique = true)
-	private String email;
+    @NotEmpty
+    @Size(min = 2, max = 15)
+    @Column(nullable = false)
+    private String nombre;
 
-	@NotNull
-	@Column(name = "create_at")
-	@Temporal(TemporalType.DATE)
-	private Date createAt;
+    @NotEmpty
+    @Size(min = 3)
+    @Column(nullable = false)
+    private String apellido;
 
-	@Column(name = "profile_picture")
-	private String profilePicture;
+    @NotEmpty
+    @Email
+    @Column(nullable = false, unique = true)
+    private String email;
 
-	@NotNull
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "region_id")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private Region region;
+    @NotNull
+    @Column(name = "create_at")
+    @Temporal(TemporalType.DATE)
+    private Date createAt;
 
-	public Long getId() {
-		return this.id;
-	}
+    @Column(name = "profile_picture")
+    private String profilePicture;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Region region;
 
-	public String getNombre() {
-		return this.nombre;
-	}
+    @JsonIgnoreProperties({"cliente", "hibernateLazyInitializer", "handler"})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<Factura> listaFactura;
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public Long getId() {
+        return this.id;
+    }
 
-	public String getApellido() {
-		return this.apellido;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
+    public String getNombre() {
+        return this.nombre;
+    }
 
-	public String getEmail() {
-		return this.email;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getApellido() {
+        return this.apellido;
+    }
 
-	public Date getCreateAt() {
-		return this.createAt;
-	}
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
+    public String getEmail() {
+        return this.email;
+    }
 
-	public String getProfilePicture() {
-		return this.profilePicture;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setProfilePicture(String profilePicture) {
-		this.profilePicture = profilePicture;
-	}
+    public Date getCreateAt() {
+        return this.createAt;
+    }
 
-	public Region getRegion() {
-		return region;
-	}
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
 
-	public void setRegion(Region region) {
-		this.region = region;
-	}
+    public String getProfilePicture() {
+        return this.profilePicture;
+    }
 
-	@Override
-	public String toString() {
-		return "Cliente{" +
-			   "id=" + id +
-			   ", nombre='" + nombre + '\'' +
-			   ", apellido='" + apellido + '\'' +
-			   ", email='" + email + '\'' +
-			   ", createAt=" + createAt +
-			   ", profilePicture='" + profilePicture + '\'' +
-			   '}';
-	}
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
 
-	private static final long serialVersionUID = -3951419336L;
+    public Region getRegion() {
+        return region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
+    }
+
+    public List<Factura> getListaFactura() {
+        return listaFactura;
+    }
+
+    public void setListaFactura(List<Factura> listaFactura) {
+        this.listaFactura = listaFactura;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+               "id=" + id +
+               ", nombre='" + nombre + '\'' +
+               ", apellido='" + apellido + '\'' +
+               ", email='" + email + '\'' +
+               ", createAt=" + createAt +
+               ", profilePicture='" + profilePicture + '\'' +
+               '}';
+    }
+
+    private static final long serialVersionUID = -3951419336L;
 }
 

@@ -39,3 +39,24 @@ INSERT INTO roles(nombre) VALUES ('ROLE_ADMIN');
 INSERT INTO usuarios_roles(usuario_id, role_id) VALUES (1, 1);
 INSERT INTO usuarios_roles(usuario_id, role_id) VALUES (2, 2);
 INSERT INTO usuarios_roles(usuario_id, role_id) VALUES (2, 1);
+
+INSERT INTO productos(nombre, precio, create_at) VALUES ('Tercio Mahou', 3.50, NOW());
+INSERT INTO productos(nombre, precio, create_at) VALUES ('Cerveza Corona', 2.99, NOW());
+INSERT INTO productos(nombre, precio, create_at) VALUES ('Stella Artois', 4.25, NOW());
+INSERT INTO productos(nombre, precio, create_at) VALUES ('Heineken', 3.75, NOW());
+INSERT INTO productos(nombre, precio, create_at) VALUES ('Guinness Stout', 5.50, NOW());
+INSERT INTO productos(nombre, precio, create_at) VALUES ('Budweiser', 2.95, NOW());
+INSERT INTO productos(nombre, precio, create_at) VALUES ('Corona Extra', 3.25, NOW());
+INSERT INTO productos(nombre, precio, create_at) VALUES ('Pilsner Urquell', 4.50, NOW());
+INSERT INTO productos(nombre, precio, create_at) VALUES ('Becks', 3.80, NOW());
+INSERT INTO productos(nombre, precio, create_at) VALUES ('Samuel Adams', 4.75, NOW());
+
+INSERT INTO facturas(descripcion, observacion, cliente_id, create_at) VALUES ('Factura terraza', null, 1, NOW());
+INSERT INTO facturas_items(cantidad, factura_id, producto_id) VALUES(1, 1, 1);
+INSERT INTO facturas_items(cantidad, factura_id, producto_id) VALUES(3, 1, 2);
+INSERT INTO facturas_items(cantidad, factura_id, producto_id) VALUES(6, 1, 3);
+INSERT INTO facturas_items(cantidad, factura_id, producto_id) VALUES(2, 1, 4);
+
+INSERT INTO facturas(descripcion, observacion, cliente_id, create_at) VALUES ('Factura terraza', 'pesados', 1, NOW());
+
+INSERT INTO facturas_items(cantidad, factura_id, producto_id) VALUES(3, 2, 6);

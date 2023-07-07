@@ -65,7 +65,7 @@ public class ClienteRestController {
 		return clienteService.findAll(pageable);
 	}
 
-	@Secured({"ROLE_ADMIN", "ROLE_USER"})
+	//@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@GetMapping("/clientes/{id}")
 	public ResponseEntity<?> show(@PathVariable Long id) {
 		Cliente cliente = null;
@@ -80,7 +80,6 @@ public class ClienteRestController {
 		if (cliente == null) {
 			response.put("mensaje", "El cliente con id: " + id + " no existe.");
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
-
 		}
 		return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
 	}
@@ -110,7 +109,7 @@ public class ClienteRestController {
 		response.put("cliente", createdClient);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
-//asda
+
 	@Secured("ROLE_ADMIN")
 	@PutMapping("/clientes/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Cliente cliente, BindingResult result, @PathVariable Long id) {
