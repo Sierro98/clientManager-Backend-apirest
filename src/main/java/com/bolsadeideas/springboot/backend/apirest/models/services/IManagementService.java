@@ -1,11 +1,9 @@
 package com.bolsadeideas.springboot.backend.apirest.models.services;
 
 import com.bolsadeideas.springboot.backend.apirest.dto.UserDto;
-import com.bolsadeideas.springboot.backend.apirest.models.entity.Usuario;
 import org.springframework.http.ResponseEntity;
 
-public interface IUsuarioService {
+public interface IManagementService {
 
-	public Usuario findByUsername(String username);
-
+    public ResponseEntity<?> signUser(UserDto user);
 }

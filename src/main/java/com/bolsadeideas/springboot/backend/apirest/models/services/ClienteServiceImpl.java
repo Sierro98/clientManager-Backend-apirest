@@ -21,7 +21,7 @@ public class ClienteServiceImpl implements IClienteService {
     private IClienteDao clienteDao;
 
     @Autowired
-    IFacturaDao facturaDao;
+    private IFacturaDao facturaDao;
 
     @Override
     @Transactional(readOnly = true)

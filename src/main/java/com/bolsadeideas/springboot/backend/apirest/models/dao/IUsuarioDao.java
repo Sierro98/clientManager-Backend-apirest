@@ -5,11 +5,13 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.bolsadeideas.springboot.backend.apirest.models.entity.Usuario;
 
-public interface IUsuarioDao extends CrudRepository<Usuario, Long>{
-	
-	public Usuario findByUsername(String username);
-	
-	@Query("select u from Usuario u where u.username=?1")
-	public Usuario findByUsername2(String username);
+public interface IUsuarioDao extends CrudRepository<Usuario, Long> {
+
+    public Usuario findByUsername(String username);
+
+    public Usuario findByEmail(String email);
+
+    @Query("select u from Usuario u where u.username=?1")
+    public Usuario findByUsername2(String username);
 
 }
