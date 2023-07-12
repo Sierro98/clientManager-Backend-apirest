@@ -3,7 +3,9 @@ package com.bolsadeideas.springboot.backend.apirest.models.services;
 import java.util.List;
 
 import com.bolsadeideas.springboot.backend.apirest.models.dao.IFacturaDao;
+import com.bolsadeideas.springboot.backend.apirest.models.dao.IProductoDao;
 import com.bolsadeideas.springboot.backend.apirest.models.entity.Factura;
+import com.bolsadeideas.springboot.backend.apirest.models.entity.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +24,9 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Autowired
     private IFacturaDao facturaDao;
+
+    @Autowired
+    private IProductoDao productoDao;
 
     @Override
     @Transactional(readOnly = true)
@@ -76,5 +81,13 @@ public class ClienteServiceImpl implements IClienteService {
     public void deleteFactura(Long id) {
         facturaDao.deleteById(id);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Producto> findProductoByNombre(String nombre) {
+        return productoDao.findByNombreContainingIgnoreCase(nombre);
+    }
+
+
 
 }
