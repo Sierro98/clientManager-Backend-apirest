@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class FacturaRestController {
     @Autowired
     private IClienteService clienteService;
 
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     @GetMapping("/facturas/{id}")
     public ResponseEntity<?> show(@PathVariable Long id) {
         Factura factura;
@@ -40,7 +42,7 @@ public class FacturaRestController {
         }
         return new ResponseEntity<>(factura, HttpStatus.OK);
     }
-
+    @Secured({"ROLE_ADMIN"})
     @DeleteMapping("/facturas/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         Factura factura = null;
@@ -62,6 +64,7 @@ public class FacturaRestController {
         }
     }
 
+    @Secured({"ROLE_ADMIN"})
     @GetMapping("/facturas/filtrar-producto/{term}")
     public ResponseEntity<?> filtrarProductos(@PathVariable String term) {
         List<Producto> listaProductos = new ArrayList<>();
@@ -76,6 +79,7 @@ public class FacturaRestController {
         return new ResponseEntity<>(listaProductos, HttpStatus.OK);
     }
 
+    @Secured({"ROLE_ADMIN"})
     @PostMapping("/facturas")
     public ResponseEntity<?> crearFactura(@RequestBody Factura factura) {
         Map<String, Object> response = new HashMap<>();
